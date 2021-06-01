@@ -1,0 +1,56 @@
+//lambdaに送られてきたデータ。引数がイベントとして受け渡される。
+//base64でエンコードされているからデーコードする必要がある
+event 
+{
+    'awslogs': 
+        {
+            'data': 'base64でエンコードされている'
+        }
+}
+
+//元々のデータ型かな？　logEvents['message'] はstringになっている為　json lordsでjson形式にデコードしてやる必要がある。
+{
+    "messageType": "DATA_MESSAGE",
+    "owner": "string",
+    "logGroup": "logグループ名",
+    "logStream": "stream string",
+    "subscriptionFilters": [
+        "none"
+    ],
+    "logEvents": [
+        {
+            "id": "",
+            "timestamp": int,
+            "message": "{\"log_type\":\"host\",\"time_local\":\"time-stamp\",\"client_ip\":\"ip, ip, ip\",\"remote_addr\":\"ip_number\",\"remote_user\":\"\",\"request\":\"GET / HTTP/1.1\",\"status\":\"200\",\"body_bytes_sent\":\"0\",\"request_time\":\"0.335\",\"http_referrer\""}"
+        }
+    ]
+}
+
+//jsonにデーコード後
+josn_data 
+{
+    'messageType': 'DATA_MESSAGE', 
+    'owner': 'int', 
+    'logGroup': 'log group名', 
+    'logStream': 'stream string',
+    'subscriptionFilters': ['none'], 
+    'logEvents': [
+        {
+            'id': 'string', 
+            'timestamp': init, 
+            'message': 
+                '{
+                    "log_type":"",
+                    "time_local":"time-stamp",
+                    "client_ip":"ip", "p", 
+                    "remote_user":"",
+                    "request":"GET /admin/ HTTP/1.1",
+                    "status":"200","body_bytes_sent":"0",
+                    "request_time":"0.184",
+                    "http_referrer":"url",
+                    "http_user_agent":",
+                    "request_id":"-"
+                }'
+        }, 
+    ]
+}
